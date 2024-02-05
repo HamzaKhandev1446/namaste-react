@@ -1,19 +1,23 @@
 {
   "devDependencies": {
+    "@parcel/transformer-sass": "^2.10.2",
     "parcel": "^2.10.2",
     "process": "^0.11.10"
   },
   "dependencies": {
+    "node-sass": "^9.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
-  "broserList":[
+  "broserList": [
     "last 2 versions"
   ],
   "name": "namaset-react",
   "description": "",
   "version": "1.0.0",
   "scripts": {
+    "dev": "npx parcel index.html",
+    "build": "npx parcel build index.html",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
