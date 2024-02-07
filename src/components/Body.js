@@ -1,5 +1,6 @@
 import RestaurantCard from "./RestaurantCard";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import "./Body.scss";
 
 const Body = () => {
@@ -63,7 +64,17 @@ const Body = () => {
 
       <div className="res-container">
         {filteredRestaurants.map((restaurant, index) => (
-          <RestaurantCard key={index} restaurantsData={restaurant} />
+          restaurant?.card.card.info?.id ?
+          <Link
+            key={restaurant?.card.card.info?.id}
+            to={"/restaurants/" + restaurant?.card.card.info?.id}
+          >
+            <RestaurantCard
+              key={restaurant?.card.card.info?.id}
+              restaurantsData={restaurant}
+            />
+          </Link>
+          : null
         ))}
       </div>
     </>
