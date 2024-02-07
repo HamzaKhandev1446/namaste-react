@@ -1,9 +1,11 @@
 import RestaurantCard from "./RestaurantCard";
-import { generateRandomData } from "../utils/mockData";
 import { useEffect, useState } from "react";
+import "./Body.scss";
 
 const Body = () => {
-  const [restaurantsData, setrestaurantsData] = useState(generateRandomData());
+  const [restaurantsData, setrestaurantsData] = useState([]);
+  const [filteredRestaurants, setfilteredRestaurants] = useState([]);
+  const [searchText, setSearchText] = useState("");
 
   useEffect(() => {
     fetchData();
@@ -16,30 +18,55 @@ const Body = () => {
 
     const json = await data.json();
     setrestaurantsData(json.data.cards);
+    setfilteredRestaurants(json.data.cards);
   };
 
   return (
-    <div className="body">
-      <div className="search-field">
+    <>
+      <div className="top-body-header">
+        <div className="search-container">
+          <input
+            type="text"
+            placeholder="Search for restaurants"
+            className="search-bar"
+            value={searchText}
+            onChange={(e) => {
+              setSearchText(e.target.value);
+            }}
+          ></input>
+          <button
+            className="search-button"
+            onClick={() => {
+              const filteredData = restaurantsData.filter((restaurant) => {
+                return restaurant?.card?.card?.info?.name
+                  .toLowerCase()
+                  .includes(searchText.toLowerCase());
+              });
+              setfilteredRestaurants(filteredData);
+            }}
+          >
+            Search
+          </button>
+        </div>
         <button
           className="search-button"
           onClick={() => {
             const filteredData = restaurantsData.filter((restaurant) => {
-              return restaurant.rating > 4;
+              return restaurant?.card?.card?.info?.avgRating > 4;
             });
-            setrestaurantsData(filteredData);
+            setfilteredRestaurants(filteredData);
           }}
         >
-          Filter
+          Top Rated Restaurants
         </button>
       </div>
 
       <div className="res-container">
-        {restaurantsData.map((restaurant, index) => (
+        {filteredRestaurants.map((restaurant, index) => (
           <RestaurantCard key={index} restaurantsData={restaurant} />
         ))}
       </div>
-    </div>
+    </>
   );
 };
 
