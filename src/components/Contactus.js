@@ -1,8 +1,10 @@
+import UserClass from "./UserClass";
+
 const Contactus = () => {
   return (
     <div>
       <h1>Contact Us</h1>
-      <p>Phone: 123-456-7890</p>
+      <UserClass name="Hamza Khan" />
     </div>
   );
 };

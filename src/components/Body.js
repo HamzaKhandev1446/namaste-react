@@ -1,5 +1,6 @@
 import RestaurantCard from "./RestaurantCard";
 import { useEffect, useState } from "react";
+import useOnlineStatus from "../utils/useOnlineStatus";
 import { Link } from "react-router-dom";
 import "./Body.scss";
 
@@ -20,7 +21,14 @@ const Body = () => {
     const json = await data.json();
     setrestaurantsData(json.data.cards);
     setfilteredRestaurants(json.data.cards);
-  };
+ };
+ 
+  const onlineStatus= useOnlineStatus();
+  console.log(onlineStatus);
+
+  if (!onlineStatus) {
+    return <h1>There is some issue with your internet. Please check</h1>;
+  }
 
   return (
     <>
