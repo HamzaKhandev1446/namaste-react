@@ -1,11 +1,14 @@
 import { RES_LOGO } from "../utils/constants";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import UserContext from "../utils/UserContext";
 
 const Header = () => {
   const [btnName, setBtnName] = useState("Login");
   const onlineStatus = useOnlineStatus();
+  const user = useContext(UserContext);
+  console.log(user?.loggedInUser);
   return (
     <div className="header">
       <div className="logo-div">
@@ -14,9 +17,7 @@ const Header = () => {
 
       <div className="nav-bar">
         <ul className="nav-list">
-          <li className="nav-item">
-          {onlineStatus ? "🟢": "⚫"}
-          </li>
+          <li className="nav-item">{onlineStatus ? "🟢" : "⚫"}</li>
           <li className="nav-item">
             <Link to="/"> Home </Link>
           </li>
@@ -40,6 +41,9 @@ const Header = () => {
           >
             {btnName}
           </button>
+          <li className="nav-item">
+            <h3>{user?.loggedInUser}</h3>
+          </li>
         </ul>
       </div>
     </div>

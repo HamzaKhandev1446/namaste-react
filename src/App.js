@@ -7,8 +7,10 @@ import Body from "./components/Body";
 import ErrorPage from "./components/ErrorPage";
 import Contactus from "./components/Contactus";
 import RestaurantMenu from "./components/RestaurantMenu";
+import { useState } from "react";
 
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
+import UserContext from "./utils/UserContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -16,11 +18,14 @@ const Grocery = lazy(() => import("./components/Grocery"));
 const AboutUs = lazy(() => import("./components/Aboutus"));
 
 const App = () => {
+  const [userName, setUserName] = useState("Hamza Khan");
   return (
-    <div className="app">
-      <Header></Header>
-      <Outlet />
-    </div>
+    <UserContext.Provider value={{ loggedInUser: userName, setUserName }}>
+      <div className="app">
+        <Header></Header>
+        <Outlet />
+      </div>
+    </UserContext.Provider>
   );
 };
 

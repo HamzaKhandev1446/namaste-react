@@ -12,9 +12,11 @@
         }
 
         .nav-bar {
-            justify-content: flex-start;
+            width: 100%;
             display: flex;
-            width: 600px;
+            justify-content: flex-end;
+            flex-wrap: wrap;
+
 
             .nav-list {
                 display: flex;
