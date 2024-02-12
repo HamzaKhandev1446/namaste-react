@@ -14,6 +14,7 @@ const RestaurantMenu = () => {
   const itemCards =
     resInfo?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card
       ?.carousel;
+  console.log(itemCards);
   return (
     <div>
       <h1>{name}</h1>
